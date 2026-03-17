@@ -78,7 +78,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             background: "radial-gradient(circle at var(--x) var(--y), rgba(255,255,255,0.08) 0%, transparent 40%)",
             "--x": useTransform(glowXSpring, (v) => `${v}px`) as any,
             "--y": useTransform(glowYSpring, (v) => `${v}px`) as any,
-          }}
+          } as any}
         />
 
         {/* Content */}
