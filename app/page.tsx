@@ -5,7 +5,7 @@ import ProjectCard from "./components/ProjectCard";
 import DiplomaCard from "./components/DiplomaCard";
 import { projects } from "./projects";
 import { diplomas } from "./diplomas";
-import { Github, Linkedin, Mail, Phone, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, ArrowUpRight, FileDown } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -55,6 +55,16 @@ export default function Home() {
               {item}
             </motion.a>
           ))}
+          <motion.a
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+            href="/Robu Iosif Darius CV.pdf"
+            download
+            className="text-sm font-medium hover:opacity-50 transition-opacity flex items-center gap-1"
+          >
+            CV <FileDown size={14} />
+          </motion.a>
         </div>
       </nav>
 
@@ -91,9 +101,19 @@ export default function Home() {
             <p className="text-white/40 max-w-sm text-lg leading-relaxed font-medium">
               Crafting immersive digital experiences through advanced code and refined design. Based in Romania.
             </p>
-            <div className="flex gap-4 mt-8 md:mt-0">
-              <div className="w-12 h-[1px] bg-white/20 self-center" />
-              <span className="text-sm uppercase tracking-widest text-white/60">Available for projects</span>
+            <div className="flex flex-col md:flex-row gap-8 mt-8 md:mt-0 items-start md:items-end">
+              <a 
+                href="/Robu Iosif Darius CV.pdf" 
+                download
+                className="group flex items-center gap-2 text-sm uppercase tracking-widest text-white/60 hover:text-white transition-colors"
+              >
+                <FileDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
+                <span>Download CV</span>
+              </a>
+              <div className="flex gap-4">
+                <div className="w-12 h-[1px] bg-white/20 self-center" />
+                <span className="text-sm uppercase tracking-widest text-white/60">Available for projects</span>
+              </div>
             </div>
           </motion.div>
         </div>

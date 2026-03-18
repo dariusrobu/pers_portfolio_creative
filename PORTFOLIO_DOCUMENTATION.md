@@ -537,7 +537,7 @@ imgs/
 ├── foodify.png (Web project screenshot)
 ├── freecodecamp.png (Web project screenshot)
 ├── xcode+app.jpeg
-└── CV - Iosif Darius Robu copy.pdf (Downloadable CV)
+└── Robu Iosif Darius CV.pdf (Downloadable CV)
 ```
 
 ### Image Specifications
@@ -737,7 +737,7 @@ portfolio/
 ├── script.js                       (Interactions & animations)
 ├── PORTFOLIO_DOCUMENTATION.md      (This file)
 ├── GEMINI.md                       (Additional documentation)
-├── CV - Iosif Darius Robu copy.pdf (Downloadable resume)
+├── Robu Iosif Darius CV.pdf (Downloadable resume)
 ├── imgs/                           (Image assets)
 │   ├── banners/                    (Project banner images)
 │   ├── classlly_screenshots/       (App screenshots)
