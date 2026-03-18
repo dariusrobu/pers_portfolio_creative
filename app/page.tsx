@@ -1,14 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "./components/ProjectCard";
 import DiplomaCard from "./components/DiplomaCard";
 import { projects } from "./projects";
 import { diplomas } from "./diplomas";
-import { Github, Linkedin, Mail, Phone, ArrowUpRight, FileDown } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, ArrowUpRight, FileDown, Menu, X } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navLinks = [
+    { name: "Work", href: "#work" },
+    { name: "Certifications", href: "#certifications" },
+    { name: "About", href: "#about" },
+    { name: "Contact", href: "#contact" },
+  ];
   const containerVars = {
     hidden: { opacity: 0 },
     visible: {
@@ -42,17 +51,19 @@ export default function Home() {
         >
           DARIUS.ROBU
         </motion.span>
-        <div className="flex gap-8">
-          {["Work", "Certifications", "About", "Contact"].map((item, i) => (
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex gap-8">
+          {navLinks.map((item, i) => (
             <motion.a
-              key={item}
+              key={item.name}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + i * 0.1 }}
-              href={`#${item.toLowerCase()}`}
+              href={item.href}
               className="text-sm font-medium hover:opacity-50 transition-opacity"
             >
-              {item}
+              {item.name}
             </motion.a>
           ))}
           <motion.a
@@ -66,7 +77,75 @@ export default function Home() {
             CV <FileDown size={14} />
           </motion.a>
         </div>
+
+        {/* Mobile Menu Trigger */}
+        <button 
+          onClick={() => setIsMenuOpen(true)}
+          className="md:hidden text-white p-2"
+        >
+          <Menu size={24} />
+        </button>
       </nav>
+
+      {/* Mobile Drawer Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            className="fixed inset-0 z-[100] bg-[#050505] flex flex-col p-8 md:hidden"
+          >
+            <div className="flex justify-between items-center mb-20">
+              <span className="text-sm font-medium tracking-tighter text-white">DARIUS.ROBU</span>
+              <button onClick={() => setIsMenuOpen(false)} className="text-white p-2 hover:bg-white/10 rounded-full transition-colors">
+                <X size={32} />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-8">
+              {navLinks.map((item, i) => (
+                <motion.a
+                  key={item.name}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 + i * 0.1 }}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-5xl font-black uppercase tracking-tighter text-white hover:text-white/40 transition-colors"
+                >
+                  {item.name}
+                </motion.a>
+              ))}
+              <motion.a
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 }}
+                href="/Robu Iosif Darius CV.pdf"
+                download
+                className="text-5xl font-black uppercase tracking-tighter text-white/20 hover:text-white transition-colors flex items-center gap-4"
+              >
+                CV <FileDown size={40} />
+              </motion.a>
+            </div>
+
+            <div className="mt-auto flex justify-between items-end">
+              <div className="flex gap-8">
+                <a href="https://github.com/dariusrobu" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">
+                  <Github size={24} />
+                </a>
+                <a href="https://www.linkedin.com/in/darius-robu-095997386" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">
+                  <Linkedin size={24} />
+                </a>
+              </div>
+              <div className="text-[10px] uppercase tracking-widest text-white/10 font-mono">
+                ROBU.V02
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section className="h-screen flex flex-col justify-center px-8 relative overflow-hidden">
